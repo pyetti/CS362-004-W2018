@@ -10,3 +10,4 @@ cmake-build-debug
 **.gcno
 playdom
 **.o
+**.gcov
