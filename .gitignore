@@ -1,5 +1,12 @@
-projects/yettip/dominion/badTestDrawCard
-projects/yettip/dominion/badTestDrawCard.dSYM/
-projects/yettip/dominion/playdom.dSYM/
-projects/yettip/dominion/player.dSYM/
-projects/yettip/dominion/testDrawCard.dSYM/
+**/badTestDrawCard
+**/badTestDrawCard.dSYM/
+**/playdom.dSYM/
+**/player.dSYM/
+**/testDrawCard.dSYM/
+CMakeLists.txt
+cmake-build-debug
+.idea/
+**.gcda
+**.gcno
+playdom
+**.o
