@@ -23,6 +23,7 @@ static inline const int runner(struct unittest *test) {
 }
 
 // make the vtables arrays so they can be used as pointers
-extern const struct unittest_vtable_ unittest1[], unittest2[], unittest3[], unittest4[];
+extern const struct unittest_vtable_ unittest1[], unittest2[], unittest3[], unittest4[],
+	card_unittest1[], card_unittest2[], card_unittest3[], card_unittest4[];
 
 #endif //DOMINION_UNITTEST_H
