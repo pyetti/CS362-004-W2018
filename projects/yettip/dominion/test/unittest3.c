@@ -29,21 +29,21 @@ static const int run(void) {
 
 void test_game_over_true_no_province_cards(struct gameState *gameState) {
 	gameState->supplyCount[province] = 0;
-	assertTrue(isGameOver(gameState), "test_game_over_true_no_province_cards");
+	assertTrue((void *)isGameOver(gameState), "test_game_over_true_no_province_cards");
 }
 
 void test_game_over_true_three_supply_pile_at_0(struct gameState *gameState) {
 	gameState->supplyCount[smithy] = 0;
 	gameState->supplyCount[adventurer] = 0;
 	gameState->supplyCount[salvager] = 0;
-	assertTrue(isGameOver(gameState), "test_game_over_true_three_supply_pile_at_0");
+	assertTrue((void *)isGameOver(gameState), "test_game_over_true_three_supply_pile_at_0");
 }
 
 void test_game_over_false(struct gameState *gameState) {
 	gameState->supplyCount[smithy] = 0;
 	gameState->supplyCount[adventurer] = 0;
 	gameState->supplyCount[province] = 1;
-	assertTrue(!isGameOver(gameState), "test_game_over_false: three piles are not empty");
+	assertTrue((void *)!isGameOver(gameState), "test_game_over_false: three piles are not empty");
 }
 
 const struct unittest_vtable_ unittest3[] = {{run}};

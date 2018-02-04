@@ -29,13 +29,13 @@ void test_baron_card_choice_0(struct gameState gameState) {
 	int whoseTurn = gameState.whoseTurn;
 	int discardCount = gameState.discardCount[gameState.whoseTurn];
 	cardEffect(baron, 0, 0, 0, &gameState, 0, 0);
-	assertA_Equals_B(6, gameState.supplyCount[estate], "Estate supply count from cardEffect(baron), choice 0");
-	assertA_Equals_B(5, gameState.deckCount[whoseTurn], "Deck count from cardEffect(baron), choice 0");
+	assertA_Equals_B((void *)6, (void *)gameState.supplyCount[estate], "Estate supply count from cardEffect(baron), choice 0");
+	assertA_Equals_B((void *)5, (void *)gameState.deckCount[whoseTurn], "Deck count from cardEffect(baron), choice 0");
 
 	int card = gameState.discard[whoseTurn][discardCount];
 
-	assertA_Equals_B(estate, card, "Estate is discarded from cardEffect(baron), choice 0");
-	assertA_Equals_B(discardCount + 1, gameState.discardCount[gameState.whoseTurn], "Discard count is reduced by 1 from cardEffect(baron), choice 0");
+	assertA_Equals_B((void *)estate, (void *)card, "Estate is discarded from cardEffect(baron), choice 0");
+	assertA_Equals_B((void *)discardCount + 1, (void *)gameState.discardCount[gameState.whoseTurn], "Discard count is reduced by 1 from cardEffect(baron), choice 0");
 	printf("\n");
 }
 
@@ -46,8 +46,8 @@ void test_baron_card_choice_1(struct gameState gameState) {
 	int numberOfEstateCardsInHand = getNumberOfCardInHand(estate, gameState);
 
 	cardEffect(baron, 1, 0, 0, &gameState, 0, 0);
-	assertA_Equals_B(currentCoins + 4, gameState.coins, "Increase Coins by 4 from cardEffect(baron), choice 1");
-	assertA_Equals_B(numberOfEstateCardsInHand - 1, getNumberOfCardInHand(estate, gameState), "Deck count from cardEffect(baron), choice 1");
+	assertA_Equals_B((void *)currentCoins + 4, (void *)gameState.coins, "Increase Coins by 4 from cardEffect(baron), choice 1");
+	assertA_Equals_B((void *)numberOfEstateCardsInHand - 1, (void *)getNumberOfCardInHand(estate, gameState), "Deck count from cardEffect(baron), choice 1");
 	printf("\n");
 }
 

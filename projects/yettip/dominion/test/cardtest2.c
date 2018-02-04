@@ -23,8 +23,8 @@ static const int run(void) {
 void test_adventurer_card(struct gameState gameState) {
 	int whoseTurn = gameState.whoseTurn;
 	cardEffect(adventurer, 0, 0, 0, &gameState, 0, 0);
-	assertA_Equals_B(7, gameState.handCount[whoseTurn], "Hand count from cardEffect(adventurer)");
-	assertA_Equals_B(3, gameState.deckCount[whoseTurn], "Deck count from cardEffect(adventurer)");
+	assertA_Equals_B((void *)7, (void *)gameState.handCount[whoseTurn], "Hand count from cardEffect(adventurer)");
+	assertA_Equals_B((void *)3, (void *)gameState.deckCount[whoseTurn], "Deck count from cardEffect(adventurer)");
 	printf("\n");
 }
 

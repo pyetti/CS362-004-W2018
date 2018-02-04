@@ -6,6 +6,7 @@ Description: Implementation for testRunner.c
 
 #include "unittest.h"
 
+
 int main() {
 
 	struct unittest test1 = {unittest1};
@@ -17,10 +18,10 @@ int main() {
 	struct unittest card_test3 = {card_unittest3};
 	struct unittest card_test4 = {card_unittest4};
 
-//	runner(&test1);
-//	runner(&test2);
-//	runner(&test3);
-//	runner(&test4);
+	runner(&test1);
+	runner(&test2);
+	runner(&test3);
+	runner(&test4);
 
 	runner(&card_test1);
 	runner(&card_test2);

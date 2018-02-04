@@ -25,12 +25,12 @@ static const int run(void) {
 void test_buy_card_fails(struct gameState G) {
 	G.numBuys = 0;
 	printf("test_buy_card_fails: Current number of buys = %d\n", G.numBuys);
-	assertA_Equals_B(-1, buyCard(province, &G), "User has no buys");
+	assertA_Equals_B((void *)-1, (void *)buyCard(province, &G), "User has no buys");
 
 	G.numBuys = 1;
-	assertA_Equals_B(-1, buyCard(province, &G), "User doesn't have enough coins");
+	assertA_Equals_B((void *)-1, (void *)buyCard(province, &G), "User doesn't have enough coins");
 
-	assertA_Equals_B(-1, buyCard(baron, &G), "No Baron Cards to buy");
+	assertA_Equals_B((void *)-1, (void *)buyCard(baron, &G), "No Baron Cards to buy");
 	printf("\n");
 }
 
@@ -40,13 +40,13 @@ void test_buy_card_passes(struct gameState G) {
 	int discardCount = G.discardCount[player];
 
 	printf("test_buy_card_passes: Current number of buys = %d\n", G.numBuys);
-	assertA_Equals_B(10, G.supplyCount[smithy], "Supply count contains 10 smithy cards");
-	assertA_Equals_B(0, buyCard(smithy, &G), "Player buys smithy");
-	assertA_Equals_B(9, G.supplyCount[smithy], "Player now has 9 smithy cards");
-	assertA_Equals_B(currentNumberOfBuys - 1, G.numBuys, "Player has 1 less number of buys");
-	assertA_Equals_B(0, G.coins, "Player now has 9 smithy cards");
-	assertA_Equals_B(discardCount + 1, G.discardCount[player], "Player has 1 more card in discard deck");
-	assertA_Equals_B(0, G.numBuys, "User now has 0 buys");
+	assertA_Equals_B((void *)10, (void *)G.supplyCount[smithy], "Supply count contains 10 smithy cards");
+	assertA_Equals_B(0, (void *)buyCard(smithy, &G), "Player buys smithy");
+	assertA_Equals_B((void *)9, (void *)G.supplyCount[smithy], "Player now has 9 smithy cards");
+	assertA_Equals_B((void *)currentNumberOfBuys - 1, (void *)G.numBuys, "Player has 1 less number of buys");
+	assertA_Equals_B(0, (void *)G.coins, "Player now has 9 smithy cards");
+	assertA_Equals_B((void *)discardCount + 1, (void *)G.discardCount[player], "Player has 1 more card in discard deck");
+	assertA_Equals_B(0, (void *)G.numBuys, "User now has 0 buys");
 	printf("\n");
 }
 
