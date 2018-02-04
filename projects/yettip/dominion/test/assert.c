@@ -7,21 +7,21 @@ Description: Implementation for assert.c
 #include <stdio.h>
 #include "assert.h"
 
-void print_int(int x) {
-	printf("%d", x);
-}
-
-void print_double(double x) {
-	printf("%f", x);
-}
-
-void print_string(char *x) {
-	printf("%s", x);
-}
-
-void print_char(char x) {
-	printf("%c", x);
-}
+//void print_int(int x) {
+//	printf("%d", x);
+//}
+//
+//void print_double(double x) {
+//	printf("%f", x);
+//}
+//
+//void print_string(char *x) {
+//	printf("%s", x);
+//}
+//
+//void print_char(char x) {
+//	printf("%c", x);
+//}
 
 #define print(X) _Generic((X),             \
                      float: print_double,  \
@@ -36,11 +36,7 @@ void assertA_Equals_B(const void *expected, const void *actual, const char* test
 	} else {
 		testResult = "FAILED";
 	}
-	printf("TEST %s: %s. Expected: ", testResult ,testName);
-	print(expected);
-	printf(", Actual: ");
-	print(actual);
-	printf("\n");
+	printf("TEST %s: %s.\n", testResult ,testName);
 }
 
 void assertA_GreaterThan_B(const void *expected, const void *actual, const char* testName) {
@@ -50,11 +46,7 @@ void assertA_GreaterThan_B(const void *expected, const void *actual, const char*
 	} else {
 		printf("TEST FAILED: %s\n", testName);
 	}
-	printf("TEST %s: %s. Expected: ", testResult ,testName);
-	print(expected);
-	printf(", Actual: ");
-	print(actual);
-	printf("\n");
+	printf("TEST %s: %s.\n", testResult ,testName);
 }
 
 void assertTrue(const void *value, const char* testName) {
