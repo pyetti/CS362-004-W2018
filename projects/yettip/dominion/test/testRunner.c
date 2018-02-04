@@ -7,7 +7,7 @@ Description: Implementation for testRunner.c
 #include "unittest.h"
 
 
-int main() {
+int main(int argc, char **argv) {
 
 	struct unittest test1 = {unittest1};
 	struct unittest test2 = {unittest2};

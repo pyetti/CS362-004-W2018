@@ -1,6 +1,11 @@
 CFLAGS = -Wall -fpic -coverage -lm
 NOWARNINGS = -w -fpic -coverage -lm
 
+cardTestFiles = test/cardtest1.c test/cardtest2.c test/cardtest3.c test/cardtest4.c
+unitTestFiles = test/unittest.h test/unittest1.c test/unittest2.c test/unittest3.c test/unittest4.c
+cardTestFilesOFiles = cardtest1.o cardtest2.o cardtest3.o cardtest4.o
+unitTestFilesOFiles = unittest1.o unittest2.o unittest3.o unittest4.o
+
 cards.o: cards.h cards.c
 	gcc -c dominion.c cards.c -g $(NOWARNINGS)
 
@@ -34,11 +39,16 @@ runtests: testDrawCard
 	gcov dominion.c >> unittestresult.out
 	cat dominion.c.gcov >> unittestresult.out
 
-testRunner: dominion.o cards.o
-	gcc -o testRunner test/testRunner.c test/assert.c test/unittest* test/cardtest* cards.o dominion.o rngs.o -fpic -coverage -lm -w
+compileUnitTests: $(cardTestFiles) $(unitTestFiles) test/assert.h test/assert.c
+	gcc -c $(cardTestFiles) $(unitTestFiles) test/assert.c $(NOWARNINGS)
+
+testRunner: dominion.o cards.o test/testRunner.c compileUnitTests
+	gcc -o testRunner test/testRunner.c $(cardTestFilesOFiles) $(unitTestFilesOFiles) assert.o cards.o dominion.o rngs.o -fpic -coverage -lm -w
 
 unittestresults.out: testRunner
 	./testRunner &> unittestresult.out
+	gcov -abcfu dominion.c >> unittestresult.out
+	cat dominion.c.gcov >> unittestresult.out
 
 player: player.c interface.o
 	gcc -o player player.c -g  dominion.o rngs.o interface.o $(CFLAGS)
@@ -46,4 +56,4 @@ player: player.c interface.o
 all: playdom player testDrawCard testBuyCard badTestDrawCard
 
 clean:
-	rm -f *.o playdom.exe playdom player player.exe  *.gcov *.gcda *.gcno *.so *.out testDrawCard testDrawCard.exe testRunner
+	rm -f *.o playdom.exe playdom player player.exe  *.gcov *.gcda *.gcno *.so *.out testDrawCard testDrawCard.exe testRunner test/unittest.h.gch
