@@ -5,6 +5,7 @@ Description: Implementation for cardtest1.c
 *************************************************************************/
 
 #include "../dominion.h"
+#include "../dominion_helpers.h"
 #import "unittest.h"
 #include "assert.h"
 
@@ -19,7 +20,10 @@ static const int run(void) {
 }
 
 void test_smithy_card(struct gameState gameState) {
-	playCard(smithy, -1, -1, -1, &gameState);
+	int whoseTurn = gameState.whoseTurn;
+	cardEffect(smithy, 1, 0, 0, &gameState, 0, 0);
+	assertA_Equals_B(7, gameState.handCount[whoseTurn], "Hand count from cardEffect(smithy)");
+	assertA_Equals_B(2, gameState.deckCount[whoseTurn], "Deck count from cardEffect(smithy)");
 }
 
 const struct unittest_vtable_ card_unittest1[] = {{run}};
