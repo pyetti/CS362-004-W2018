@@ -43,7 +43,7 @@ void test_game_over_false(struct gameState *gameState) {
 	gameState->supplyCount[smithy] = 0;
 	gameState->supplyCount[adventurer] = 0;
 	gameState->supplyCount[province] = 1;
-	assertTrue(!isGameOver(gameState), "test_game_over_false");
+	assertTrue(!isGameOver(gameState), "test_game_over_false: three piles are not empty");
 }
 
 const struct unittest_vtable_ unittest3[] = {{run}};
