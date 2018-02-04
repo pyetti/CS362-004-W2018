@@ -4,14 +4,13 @@ Date:  1/28/18
 Description: Implementation for cardtest2.c
 *************************************************************************/
 
+#include "../dominion.h"
+#import "unittest.h"
+#include "assert.h"
 
-// Default Constructor
+static const int run(void) {
 
+	return 4;
+}
 
-// Parameterized Constructor
-
-
-// Copy Constructor
-
-
-// Destructor
+const struct unittest_vtable_ card_unittest2[] = {{run}};
