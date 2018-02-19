@@ -9,10 +9,13 @@ Description: Specification for unittest.h
 
 #include "TestUtility.h"
 
+int testCount;
+
 struct unittest {
 	// make vtable_ a pointer so they can be shared between instances
 	// use _ to mark private members
 	const struct unittest_vtable_ *vtable_;
+	int randomTestCount;
 };
 
 struct unittest_vtable_ {
@@ -21,8 +24,11 @@ struct unittest_vtable_ {
 
 // wrapper function
 static inline const int runner(struct unittest *test) {
+	testCount = test->randomTestCount;
 	return test->vtable_->run();
 }
+
+void setRandomTestCount(int count);
 
 // make the vtables arrays so they can be used as pointers
 extern const struct unittest_vtable_ unittest1[], unittest2[], unittest3[], unittest4[],

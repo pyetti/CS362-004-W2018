@@ -17,4 +17,6 @@ int getRandomNumberOfPlayers(int maxPlayers, int minPlayers);
 
 int getRandomPlayer(int numberOfPlayers);
 
+int getRandomChoice(int maxChoice, int minChoice);
+
 #endif //DOMINION_TESTUTILITY_H

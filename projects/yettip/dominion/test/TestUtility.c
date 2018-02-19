@@ -25,3 +25,7 @@ int getRandomNumberOfPlayers(int maxPlayers, int minPlayers) {
 int getRandomPlayer(int numberOfPlayers) {
 	return rand() % (numberOfPlayers);
 }
+
+int getRandomChoice(int maxChoice, int minChoice) {
+	return rand() % (maxChoice + 1 - minChoice) + minChoice;
+}

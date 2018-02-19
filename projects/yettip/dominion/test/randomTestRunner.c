@@ -9,10 +9,14 @@ Description: Implementation for randomTestRunner.c
 int main(int argc, char **argv) {
 	struct unittest adventurer = {randomtestcard1};
 	struct unittest smithy = {randomtestcard2};
-//	struct unittest baron = {randomtestcard3};
+	struct unittest baron = {randomtestcard3};
 
-//	runner(&adventurer);
+	adventurer.randomTestCount = 1000;
+	smithy.randomTestCount = 1000;
+	baron.randomTestCount = 1000;
+
+	runner(&adventurer);
 	runner(&smithy);
-//	runner(&baron);
+	runner(&baron);
 	return 0;
 }

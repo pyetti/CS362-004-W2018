@@ -12,29 +12,36 @@ Description: Implementation for randomTester.c
 #include "assert.h"
 #include "../cards.h"
 
-void testAdventurer();
+void testAdventurer(int count);
 
-static const int run(void) {
+static const int run() {
 	srand(time(NULL));
-	testAdventurer();
+	testAdventurer(testCount);
 	return 9;
 }
 
-void testAdventurer() {
+void setRandomTestCount(int count) {
+	testCount = count;
+}
+
+void testAdventurer(int count) {
 	int k[10] = {adventurer, gardens, embargo, village, minion, mine, baron, sea_hag, tribute, smithy};
 	struct gameState state;
-	for (int test = 0; test < 1000; ++test) {
+	for (int test = 0; test < count; ++test) {
 		int numOfPlayers = getRandomNumberOfPlayers(4, 2);
 		initializeGame(numOfPlayers, k, 2, &state);
 		int player = getRandomPlayer(numOfPlayers);
 		state.whoseTurn = player;
-		int coinsBefore = cardCountInHand(player, copper, state) + cardCountInHand(player, silver, state) + cardCountInHand(player, gold, state);
+		int coinsBefore = cardCountInHand(player, copper, state) + cardCountInHand(player, silver, state) +
+		                  cardCountInHand(player, gold, state);
 		adventurerCard(player, &state);
-		int coinsAfter = cardCountInHand(player, copper, state) + cardCountInHand(player, silver, state) + cardCountInHand(player, gold, state);
-		printf("TEST ADVENTURER CARD: coins before = %d, coins after = %d | ", coinsBefore, coinsAfter);
-		assertA_GreaterThan_B((void*) coinsAfter, (void*) coinsBefore + 1, "");
+		int coinsAfter = cardCountInHand(player, copper, state) + cardCountInHand(player, silver, state) +
+		                 cardCountInHand(player, gold, state);
+		char testResult[1000];
+		sprintf(testResult, "TEST ADVENTURER CARD: coins before = %d, coins after = %d", coinsBefore, coinsAfter);
+		assertA_GreaterThan_B((void *) coinsAfter, (void *) coinsBefore + 1, testResult);
 	}
-	printf("\nDONE");
+	printf("ADVENTURER CARD TEST COMPLETE. %d tests run\n\n", testCount);
 }
 
 const struct unittest_vtable_ randomtestcard1[] = {{run}};
