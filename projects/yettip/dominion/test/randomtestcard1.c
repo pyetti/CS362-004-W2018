@@ -20,10 +20,6 @@ static const int run() {
 	return 9;
 }
 
-void setRandomTestCount(int count) {
-	testCount = count;
-}
-
 void testAdventurer(int count) {
 	int k[10] = {adventurer, gardens, embargo, village, minion, mine, baron, sea_hag, tribute, smithy};
 	struct gameState state;
