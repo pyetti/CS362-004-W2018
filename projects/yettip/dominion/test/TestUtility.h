@@ -8,18 +8,13 @@ Description: Specification for TestUtility.h
 #define DOMINION_TESTUTILITY_H
 
 #include "../dominion.h"
+#include <stdlib.h>
+#include <time.h>
 
-// utility functions
-int cardCountInHand(int player, int card, struct gameState state) {
-	int count = 0;
+int cardCountInHand(int player, int card, struct gameState state);
 
-	for (int cardPos = 0; cardPos < 500; ++cardPos) {
-		if (state.hand[player][cardPos] == card) {
-			count++;
-		}
-	}
+int getRandomNumberOfPlayers(int maxPlayers, int minPlayers);
 
-	return count;
-}
+int getRandomPlayer(int numberOfPlayers);
 
 #endif //DOMINION_TESTUTILITY_H

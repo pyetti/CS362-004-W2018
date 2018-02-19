@@ -8,11 +8,11 @@ Description: Implementation for randomTestRunner.c
 
 int main(int argc, char **argv) {
 	struct unittest adventurer = {randomtestcard1};
-//	struct unittest card2 = {randomtestcard2};
-//	struct unittest card3 = {randomtestcard3};
+	struct unittest smithy = {randomtestcard2};
+//	struct unittest baron = {randomtestcard3};
 
-	runner(&adventurer);
-//	runner(&card2);
-//	runner(&card3);
-	return 1;
+//	runner(&adventurer);
+	runner(&smithy);
+//	runner(&baron);
+	return 0;
 }

@@ -9,7 +9,6 @@ Description: Implementation for randomTester.c
 #include <time.h>
 #include "../dominion.h"
 #include "unittest.h"
-#include "TestUtility.h"
 #include "assert.h"
 #include "../cards.h"
 
@@ -25,9 +24,10 @@ void testAdventurer() {
 	int k[10] = {adventurer, gardens, embargo, village, minion, mine, baron, sea_hag, tribute, smithy};
 	struct gameState state;
 	for (int test = 0; test < 1000; ++test) {
-		int numOfPlayers = rand() % (4 + 1 - 2) + 2;
+		int numOfPlayers = getRandomNumberOfPlayers(4, 2);
 		initializeGame(numOfPlayers, k, 2, &state);
-		int player = rand() % (numOfPlayers);
+		int player = getRandomPlayer(numOfPlayers);
+		state.whoseTurn = player;
 		int coinsBefore = cardCountInHand(player, copper, state) + cardCountInHand(player, silver, state) + cardCountInHand(player, gold, state);
 		adventurerCard(player, &state);
 		int coinsAfter = cardCountInHand(player, copper, state) + cardCountInHand(player, silver, state) + cardCountInHand(player, gold, state);

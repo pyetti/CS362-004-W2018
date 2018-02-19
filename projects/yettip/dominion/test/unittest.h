@@ -7,6 +7,8 @@ Description: Specification for unittest.h
 #ifndef DOMINION_UNITTEST_H
 #define DOMINION_UNITTEST_H
 
+#include "TestUtility.h"
+
 struct unittest {
 	// make vtable_ a pointer so they can be shared between instances
 	// use _ to mark private members
