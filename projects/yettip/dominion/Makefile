@@ -6,6 +6,11 @@ unitTestFiles = test/unittest.h test/unittest1.c test/unittest2.c test/unittest3
 cardTestFilesOFiles = cardtest1.o cardtest2.o cardtest3.o cardtest4.o
 unitTestFilesOFiles = unittest1.o unittest2.o unittest3.o unittest4.o
 
+randomTestFiles = test/randomtestcard1.c test/randomtestcard2.c test/randomtestcard3.c
+randomTestFilesOFiles = randomtestcard1.o randomtestcard2.o randomtestcard3.o
+testUtilityFiles = test/TestUtility.c
+testUtilityFilesOFiles = TestUtility.o
+
 cards.o: cards.h cards.c
 	gcc -c dominion.c cards.c -g $(NOWARNINGS)
 
@@ -50,10 +55,21 @@ unittestresults.out: testRunner
 	gcov -abcfu dominion.c >> unittestresult.out
 	cat dominion.c.gcov >> unittestresult.out
 
+compileRandomTests: $(randomTestFiles) $(testUtilityFiles) test/assert.h test/assert.c
+	gcc -c $(randomTestFiles) $(testUtilityFiles) test/assert.c $(NOWARNINGS)
+
+randomTestRunner: dominion.o cards.o test/testRunner.c compileRandomTests
+	gcc -o randomTestRunner test/randomTestRunner.c $(randomTestFilesOFiles) $(testUtilityFilesOFiles) assert.o cards.o dominion.o rngs.o -fpic -coverage -lm -w
+
+randomtestresults.out: randomTestRunner
+	./randomTestRunner &> randomtestresults.out
+	gcov -abcfu cards.c >> randomtestresults.out
+	cat cards.c.gcov >> randomtestresults.out
+
 player: player.c interface.o
 	gcc -o player player.c -g  dominion.o rngs.o interface.o $(CFLAGS)
 
 all: playdom player testDrawCard testBuyCard badTestDrawCard
 
 clean:
-	rm -f *.o playdom.exe playdom player player.exe  *.gcov *.gcda *.gcno *.so *.out testDrawCard testDrawCard.exe testRunner test/unittest.h.gch
+	rm -f *.o playdom.exe playdom player player.exe  *.gcov *.gcda *.gcno *.so *.out testDrawCard testDrawCard.exe testRunner randomTestRunner test/unittest.h.gch
