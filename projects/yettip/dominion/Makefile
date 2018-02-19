@@ -1,5 +1,5 @@
-CFLAGS = -Wall -fpic -coverage -lm
-NOWARNINGS = -w -fpic -coverage -lm
+CFLAGS = -Wall -fpic -coverage -lm -std=c99
+NOWARNINGS = -w -fpic -coverage -lm -std=c99
 
 cardTestFiles = test/cardtest1.c test/cardtest2.c test/cardtest3.c test/cardtest4.c
 unitTestFiles = test/unittest.h test/unittest1.c test/unittest2.c test/unittest3.c test/unittest4.c
