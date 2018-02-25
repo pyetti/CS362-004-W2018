@@ -1,0 +1,5 @@
+1) When playing an adventure card, discards are not happening correctly. This is because in the  adventure card function,
+z is not incremented in the else block.
+
+2) When playing a smithy card, there are too many discards. This is because in the smithy card function,
+the discard function is inside the for loop.
