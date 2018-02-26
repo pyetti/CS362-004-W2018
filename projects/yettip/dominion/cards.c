@@ -156,3 +156,15 @@ void stewardCard(int currentPlayer, int handPos, int choice1, int choice2, int c
 	//discard card from hand
 	discardCard(handPos, currentPlayer, state, 0);
 }
+
+void seaHagCard(int currentPlayer, struct gameState *state) {
+	int i;
+	for (i = 0; i < state->numPlayers; i++) {
+		if (i != currentPlayer) {
+			state->discard[i][state->discardCount[i]] = state->deck[i][state->deckCount[i]--];
+			state->deckCount[i]--;
+			state->discardCount[i]++;
+			state->deck[i][state->deckCount[i]--] = curse;//Top card now a curse
+		}
+	}
+}
