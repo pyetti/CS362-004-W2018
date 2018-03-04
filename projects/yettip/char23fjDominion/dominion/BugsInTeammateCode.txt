@@ -2,12 +2,17 @@ Bug 1
 
 Title: Adventure card
 
-Description: When playing an adventure card, discards are not happening correctly which affecting the players hands.
-This is because in the  adventure card function, z is not incremented in the else block. This is a serious bug as it
-will essentially completely change the rules of the game and expected output
+Class: Serious Bug
 
-Platform: Running on Unix
-		
+Date: 02/24/2018
+Reported By: Mr. Peter Yetti
+Email: yettip@oregonstate.edu
+
+Product: Dominion
+Platform: Unix
+
+Description: When playing an adventure card, discards are not happening correctly which affecting the players hands. This is because in the  adventure card function, z is not incremented in the else block. This is a serious bug as it will essentially completely change the rules of the game and expected output
+
 Reproducible: The bug is reproducible and will likely occur every time the game is run
 
 Steps to Reproduce: play an adventure card
@@ -18,17 +23,23 @@ Actual Results: not all drawn cards were discarded
 
 Workaround: there is no workaround
 
+
 ========================================================================================================================
 
 Bug 2
 
 Title: Smithy card
 
-Description: When playing a smithy card, there are too many discards, which affecting the players hands. This is because
-in the smithy card function, the discard function is inside the for loop. This is a serious bug as it will essentially
-completely change the rules of the game and expected output
+Class: Serious Bug
 
-Platform: Running on Unix
+Date: 02/24/2018
+Reported By: Mr. Peter Yetti
+Email: yettip@oregonstate.edu
+
+Product: Dominion
+Platform: Unix
+
+Description: When playing a smithy card, there are too many discards, which affecting the players hands. This is because in the smithy card function, the discard function is inside the for loop. This is a serious bug as it will essentially completely change the rules of the game and expected output
 
 Reproducible: The bug is reproducible and will occur every time the game is run
 
@@ -39,4 +50,5 @@ Expected Results: player should draw three cards and discard 1
 Actual Results: player discard as many cards as were drawn
 
 Workaround: there is no workaround
+
 
