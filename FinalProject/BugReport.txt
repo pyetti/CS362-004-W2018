@@ -1,0 +1,2 @@
+1. Setting URL schemes to UPPER CASE but checking for lower case (line 366)
+2. Setting 'http' as a special that disallows ":" (line 318)
