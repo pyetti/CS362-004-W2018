@@ -1,4 +1,8 @@
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import junit.framework.TestCase;
 
 //You can use this as a skeleton for your 3 different test approach
@@ -6,7 +10,7 @@ import junit.framework.TestCase;
 // Again, it is up to you to use this file or not!
 
 public class UrlValidatorTest extends TestCase {
-	
+
 	public UrlValidatorTest(String testName) {
 		super(testName);
 	}
@@ -17,7 +21,7 @@ public class UrlValidatorTest extends TestCase {
 		if (!urlValidator.isValid("http://www.google.com")) {
 			System.out.println("FAILED: http://www.google.com\n");
 		}
-		
+
 	}
 
 	public void testYourFirstPartition() {
@@ -34,28 +38,31 @@ public class UrlValidatorTest extends TestCase {
 	public void testIsValid() {
 		System.out.println("UNIT TESTING FAILURES - ALLOW ALL SCHEMES");
 		UrlValidator urlValidator = new UrlValidator(null, null, UrlValidator.ALLOW_ALL_SCHEMES);
-		testHttp(urlValidator);
-	}
-
-	private void testHttp(UrlValidator urlValidator) {
-		boolean[] results = new boolean[VALID_PARTS.length];
-		StringBuilder baseURL = new StringBuilder("http://");
-		for (int part = 0; part < VALID_PARTS.length; part++) {
-			baseURL.append(VALID_PARTS[part]);
-			boolean isValid = urlValidator.isValid(baseURL.toString());
-			if (!isValid) {
-				System.out.println("FAILED: " + baseURL);
-			}
-			results[part] = isValid;
-		}
 		
+		List<Boolean> results = testURLs(urlValidator, "http://");
+		results.addAll(testURLs(urlValidator, "ftp://"));
+		results.addAll(testURLs(urlValidator, "h3t://"));
 		for (boolean b : results) {
 			assertTrue(b);
 		}
 	}
-	
-	private static String[] VALID_PARTS = {
-			"www.google.com", ":80", "/", "subfolder", "?", "query", "=queryParameter"
+
+	private List<Boolean> testURLs(UrlValidator urlValidator, String scheme) {
+		List<Boolean> results = new ArrayList<Boolean>();
+		StringBuilder baseURL = new StringBuilder(scheme);
+		for (String part : VALID_PARTS) {
+			baseURL.append(part);
+			boolean isValid = urlValidator.isValid(baseURL.toString());
+			if (!isValid) {
+				System.out.println("FAILED: " + baseURL);
+			}
+			results.add(isValid);
+		}
+		return results;
+	}
+
+	private static String[] VALID_PARTS = { 
+			"www.google.com", ":80", "/", "subfolder", "?", "query", "=queryParameter" 
 	};
 
 }
