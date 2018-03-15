@@ -26,7 +26,57 @@ public class UrlValidatorTest extends TestCase {
 
 	public void testYourFirstPartition() {
 		// You can use this function to implement your First Partition testing
-
+		/*Boolean schemeFail = false,
+				authorityFail = false,
+				portFail = false,
+				pathFail = false,
+				queryFail = false;*/
+		
+		UrlValidator urlValidator = new UrlValidator();
+		
+		int i, j, k;
+		
+		int[] ind = {0, 0, 0, 0, 0};
+				
+		String[] schemesList = {
+				"http://", "ftp://", "h3t://", "https://"
+				},
+				authoritiesList = {
+				"www.google.com", "www.espn.com", "jsfiddle.net", "oregonstate.edu"
+				},
+				portsList = {
+				":80", ":22", ":1600", ":1"
+				},
+				pathsList = {
+				"/index", "/pages/about/", "/", "/path/Home"
+				},
+				queriesList = {
+				"?roses=red", "?violets=blue", "?roses=red&violets=blue", "?a=1&b=2&c=3"
+				};
+		
+		String[][] listList = {
+				schemesList, authoritiesList, portsList, pathsList, queriesList
+		};
+				
+		List<Boolean> results = new ArrayList<Boolean>();
+		//StringBuilder testURL = new StringBuilder(scheme);
+		for (i = 0; i < 4; i++) {
+			String scheme;
+			for (j = 0; j < 5; j++) {
+				ind[j] = i;
+				scheme = listList[0][ind[0]];
+				StringBuilder testURL = new StringBuilder(scheme);
+				for (k = 1; k < 5; k++) {
+	    		    testURL.append(listList[k][ind[k]]);
+				}
+    			boolean isValid = urlValidator.isValid(testURL.toString());
+    			if (!isValid) {
+    				System.out.println("FAILED: " + testURL);
+    			}
+    			results.add(isValid);
+    			ind[j] = 0;
+			}
+		}
 	}
 
 	public void testYourSecondPartition() {
