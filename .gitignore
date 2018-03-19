@@ -11,3 +11,7 @@ cmake-build-debug
 playdom
 **.o
 **.gcov
+**.classpath
+**/RemoteSystemsTempFiles/
+**.metadata/
+**.recommenders/
