@@ -25,12 +25,6 @@ public class UrlValidatorTest extends TestCase {
 	}
 
 	public void testYourFirstPartition() {
-		// You can use this function to implement your First Partition testing
-		/*Boolean schemeFail = false,
-				authorityFail = false,
-				portFail = false,
-				pathFail = false,
-				queryFail = false;*/
 		
 		UrlValidator urlValidator = new UrlValidator();
 		
@@ -79,11 +73,99 @@ public class UrlValidatorTest extends TestCase {
 		}
 	}
 
-	public void testYourSecondPartition() {
-		// You can use this function to implement your Second Partition testing
-
+    public void testUrlPartsArray(UrlValidator urlValidator, String[] testArray, int index, boolean expected) {
+        
+        String[] urlParts = { "https://", "www.google.com", "", "/search", "?q=google" };
+        int i, j;
+        
+		for (i = 0; i < testArray.length; i++) {
+            urlParts[index] = testArray[i];
+            StringBuilder testURL = new StringBuilder(urlParts[0]);
+			for (j = 1; j < 5; j++) {
+                testURL.append(urlParts[j]);
+			}
+			
+			boolean isValid = urlValidator.isValid(testURL.toString());
+			assertEquals(isValid, expected);
+			/*if (isValid)
+			{
+				System.out.println("Passed.");
+			}
+			
+			else
+			{
+				System.out.println("Failed.");
+			}*/
+			
+		}
 	}
-	// You need to create more test cases for your Partitions if you need to
+
+	public void unitTestsForAllParts() {
+		
+		UrlValidator urlValidator = new UrlValidator();
+				
+		String[] goodSchemes = {
+				"http://", "ftp://", "h3t://", "https://", "HTTP://", "HTTPS://", "FTP://"
+                },
+                badSchemes = {
+                 "https:/", "https:\\\\", "https;//", " https://", "https//", "h1n1://", "ho:dor//"
+				},
+				goodAuthorities = {
+				"www.google.com", "www.espn.com", "jsfiddle.net", "oregonstate.edu"
+				},
+                badAuthorities = {
+				"ww.google.com", "wwww.espn.com", "jsfiddle.not", "oregonstate..edu"
+				},
+				goodPorts = {
+				":80", ":22", ":1600", ":1"
+				},
+                badPorts = {
+				":8000000000000", ":2:2", ";1600", "1:", ":3.14159"
+				},
+				goodPaths = {
+				"/index", "/pages/about/", "/", "/path/Home"
+				},
+                badPaths = {
+				"/index\\", "/pages.com/about/", "./", "::/path/Home"
+				},
+				goodQueries = {
+				"?roses=red", "?violets=blue", "?roses=red&violets=blue", "?a=1&b=2&c=3"
+				},
+                badQueries = {
+				"?roses==red", "?birdman!=beat", "&question=ampersand", "#one=two",
+                "?planes&trains&automobiles", "&i?am=groot"
+				};
+                
+		System.out.println("Testing urls with valid schemes...");
+        testUrlPartsArray(urlValidator, goodSchemes, 0, true);
+        
+        System.out.println("Testing urls with invalid schemes...");
+        testUrlPartsArray(urlValidator, badSchemes, 0, false);
+        
+        System.out.println("Testing urls with valid authorities...");
+        testUrlPartsArray(urlValidator, goodAuthorities, 1, true);
+        
+        System.out.println("Testing urls with invalid authorities...");
+        testUrlPartsArray(urlValidator, badAuthorities, 1, false);
+        
+        System.out.println("Testing urls with valid ports...");
+        testUrlPartsArray(urlValidator, goodPorts, 2, true);
+        
+        System.out.println("Testing urls with invalid ports...");
+        testUrlPartsArray(urlValidator, badPorts, 2, false);
+        
+        System.out.println("Testing urls with valid paths...");
+        testUrlPartsArray(urlValidator, goodPaths, 3, true);
+        
+        System.out.println("Testing urls with invalid paths...");
+        testUrlPartsArray(urlValidator, badPaths, 3, false);
+        
+        System.out.println("Testing urls with valid queries...");
+        testUrlPartsArray(urlValidator, goodQueries, 4, true);
+        
+        System.out.println("Testing urls with invalid queries...");
+        testUrlPartsArray(urlValidator, badQueries, 4, false);
+	}
 
 	public void testIsValid() {
 		System.out.println("UNIT TESTING FAILURES - ALLOW ALL SCHEMES");
